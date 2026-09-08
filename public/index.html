@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Daily Journal Prompter</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>📖 AI Daily Journal</h1>
+
+        <p class="subtitle">
+            Choose your mood and get a personalized journal prompt.
+        </p>
+
+        <div class="form-section">
+
+            <label for="mood">How are you feeling?</label>
+
+            <select id="mood">
+                <option value="">Select your mood</option>
+                <option value="happy">😊 Happy</option>
+                <option value="stressed">😰 Stressed</option>
+                <option value="curious">🤔 Curious</option>
+                <option value="sad">😔 Sad</option>
+                <option value="excited">🤩 Excited</option>
+                <option value="calm">😌 Calm</option>
+            </select>
+
+            <button id="promptButton">
+                ✨ Generate Journal Prompt
+            </button>
+
+        </div>
+
+        <div class="prompt-card">
+
+            <h2>Your Journal Prompt</h2>
+
+            <p id="prompt">
+                Select your mood and generate a prompt.
+            </p>
+
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
