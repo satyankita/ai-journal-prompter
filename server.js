@@ -10,8 +10,6 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 
-const PORT = process.env.PORT || 3002;
-
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -48,13 +46,26 @@ app.post("/journal-prompt", async (req, res) => {
     );
 
     if (!response.ok) {
-      throw new Error(`Gemini API error: ${response.status}`);
+      const errorData = await response.text();
+      console.error("Gemini API error:", errorData);
+
+      return res.status(500).json({
+        error: "Gemini API request failed"
+      });
     }
 
     const data = await response.json();
 
     const journalPrompt =
-      data.candidates[0].content.parts[0].text;
+      data.candidates?.[0]?.content?.parts?.[0]?.text;
+
+    if (!journalPrompt) {
+      console.error("Gemini response:", data);
+
+      return res.status(500).json({
+        error: "Gemini did not return a journal prompt"
+      });
+    }
 
     res.json({
       prompt: journalPrompt
@@ -69,6 +80,4 @@ app.post("/journal-prompt", async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
+export default app;
